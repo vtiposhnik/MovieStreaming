@@ -40,8 +40,7 @@ export default function Catalog() {
                 <ul className="card-wrapper gap-6 grid-cols-3">
                     {currentMovies.map((movie) => (
                         <li key={movie.id} className="rounded-xl bg-white border">
-                            <figure className="flex flex-col p-2 gap-2">
-                                <img src={movie.url} alt={movie.name} className="h-[200px] rounded-xl" />
+                            <figure className={`flex flex-col p-2 gap-2 bg-[url(${movie.url})]`}>
                                 <figcaption>
                                     {movie.name}
                                     <span className="icon-star">

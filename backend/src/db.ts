@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 import dotenv from 'dotenv'
-
+import { updateMovies } from './update';
 dotenv.config()
 const password = process.env.PASSWORD_DB
 

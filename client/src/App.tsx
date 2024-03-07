@@ -1,4 +1,4 @@
-import { Routes, Route, Link, Outlet } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home'
 import Catalog from './pages/Catalog'
@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/catalog' element={<Catalog />} />
+        <Route path='/all' element={<Catalog />} />
       </Routes>
     </>
   )
