@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import '../assets/styles/styles.css'
-import Cards from "../components/Cards";
 import Pagination from "../components/Pagination";
+import SearchFilter from "../components/SearchFilter";
+import { Button } from "../components/utilComps";
 
 interface CardProps {
     id: number,
@@ -19,6 +20,8 @@ export default function Catalog() {
     const lastMovieInd = currentPage * perPage;
     const firstMovieInd = lastMovieInd - perPage;
 
+
+
     useEffect(() => {
         fetch('http://localhost:3000/catalog')
             .then((res) => {
@@ -30,30 +33,42 @@ export default function Catalog() {
             })
     }, [])
 
+    function getBackgroundClass(movie_url: string) {
+        return {
+            backgroundImage: `url(${movie_url})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover'
+        }
+    }
+
     const currentMovies = movies.slice(firstMovieInd, lastMovieInd)
     console.log('movies', movies)
     console.log('current', currentMovies)
 
     return (
         <>
-            <section className="w-[80%] p-10 border">
-                <ul className="card-wrapper gap-6 grid-cols-3">
-                    {currentMovies.map((movie) => (
-                        <li key={movie.id} className="rounded-xl bg-white border">
-                            <figure className={`flex flex-col p-2 gap-2 bg-[url(${movie.url})]`}>
-                                <figcaption>
-                                    {movie.name}
-                                    <span className="icon-star">
-                                    </span>
-                                    <h4>Year: {movie.year}</h4>
-                                    <h4>{movie.genre}</h4>
-                                </figcaption>
-                                <a href="#" className="border rounded-lg px-4 py-2 hover:bg-blue transition">Watch Movie</a>
-                            </figure>
-                        </li>
-                    ))}
-                </ul>
+            <SearchFilter />
 
+            <section className="w-[80%] p-10 mx-auto grid gap-4 text-center">
+                <a href="" className="">
+                    <ul className="flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 ">
+                        {currentMovies.map((movie) => (
+                            <li key={movie.id} className="rounded-xl bg-white border">
+                                <figure className='p-2 rounded-xl' style={getBackgroundClass(movie.url)} >
+                                    {/* <img src={movie.url} alt="movie-img" className="h-[auto] relative size-[100%]" /> */}
+                                    <figcaption className="h-[30vw] flex flex-col">
+                                        {movie.name}
+                                        <span className="icon-star">
+                                        </span>
+                                        <h4>Year: {movie.year}</h4>
+                                        <h4>{movie.genre}</h4>
+                                        <Button value="Watch Movie" url={'#'} />
+                                    </figcaption>
+                                </figure>
+                            </li>
+                        ))}
+                    </ul>
+                </a>
                 <Pagination count={countMovies} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </section>
         </>

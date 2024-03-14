@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "dev": "concurrently \"npx tsc -w\" \"ts-node src/index.ts\" \"ts-node src/db.ts\" "
+    "dev": "concurrently \"npx tsc -w\" \"ts-node src/index.ts\" \"ts-node src/db.ts\" \"ts-node src/update.ts\" "
   },
   "keywords": [],
   "author": "",

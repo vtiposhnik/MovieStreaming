@@ -11,6 +11,12 @@
     box-sizing: border-box;
 }
 
-body {
-    /* background-color: #0e1726; */
+select {
+    padding: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+select:focus {
+    box-shadow: 0 0 0 0.1rem #007bff;
 }
