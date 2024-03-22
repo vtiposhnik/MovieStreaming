@@ -9,7 +9,7 @@ dotenv.config()
 // })
 
 export async function updateMovies() {
-    const movies = await movie.findAll()
+    const movies = await movie.findAll({offset: 279})
 
     try {
         for (const item of movies) {
@@ -25,12 +25,11 @@ export async function updateMovies() {
 
             const newUrl = data.urls.regular
 
-            if (item.dataValues.url.includes("unsplash")) {
-                console.log('skipp')
-                continue
-            } else {
+            // if (item.dataValues.url.includes("unsplash")) {
+            //     console.log('skipp')
+            //     continue
+            // } else {
                 await item.update({ url: newUrl })}
-        }
 
     } catch (error) {
         console.error(error, "Couldn't update movies")

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "./utilComps";
+import { Button } from "../../util/utilComps";
 
 interface PaginationProps {
     count: number,
@@ -29,7 +29,7 @@ export default function Pagination({ count, currentPage, setCurrentPage }: Pagin
     const pageNumbers = pages.map(page => {
         if (page <= maxPagesLimit && page >= minPagesLimit) {
             return (
-                <li key={page} className=" rounded-md lg:block hidden">
+                <li key={page} className="rounded-md lg:block hidden">
                     <Button value={`${page}`} url="#" handleClick={() => handlePageClick(page)} />
                 </li>
             );
@@ -56,7 +56,7 @@ export default function Pagination({ count, currentPage, setCurrentPage }: Pagin
                 {prevDots ?
                     <Button value="..." url="#" handleClick={handlePrevious} /> : <></>}
                 {pageNumbers}
-                    {(currentPage !== 20) ? <Button value="..." url="#" handleClick={handleNext}/> : <></>}
+                {(currentPage !== 20) ? <Button value="..." url="#" handleClick={handleNext} /> : <></>}
                 <div onClick={handleLast} className="flex gap-5">
                     <Button value={`${pagesTotal}`} url="#" />
                 </div>

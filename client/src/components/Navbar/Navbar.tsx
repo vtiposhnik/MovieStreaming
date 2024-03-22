@@ -5,6 +5,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
+import DynamicSearchBar from './DynamicSearchBar'
 
 const catalog = [
   { name: 'Trending', Link: '/all' },
@@ -26,7 +27,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className='px-5 py-1'>
+    <header className='px-5 py-3'>
       <nav className='flex justify-around items-center lg:flex-row'>
         <div>
           <Link to='/'>
@@ -64,6 +65,8 @@ export default function Navbar() {
           <Link to=""> Contact </Link>
         </Popover.Group>
 
+        <DynamicSearchBar />
+
         <div className='hidden lg:flex gap-2'>
           <Link to=""> Sign Up</Link>
           <Link to="">Sign In</Link>
@@ -81,33 +84,35 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* <Dialog open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} className="relative">
-        <Dialog.Panel className="absolute right-0">
+      <Dialog open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} className="lg:hidden">
+        <Dialog.Panel className="fixed right-0 inset-y-0 z-10 p-3 bg-blue w-[50%]">
           <Dialog.Title as='div' className="flex justify-between items-center">
             <strong> Menu </strong>
-            <button onClick={() => {setMobileMenuOpen(false)}}> Close </button>
+            <button onClick={() => { setMobileMenuOpen(false) }}> Close </button>
           </Dialog.Title>
           <Disclosure>
             {({ open }) => (<>
-                <Disclosure.Button>
-                  <span>Catalog</span>
-                  <ChevronDownIcon className={open ? `rotate-180 transform` : ''} />
-                </Disclosure.Button>
-                <Disclosure.Panel>
-                  {
-                    catalog.map((item) => {
-                      return (
-                        <Link to={item.Link}> {item.name}</Link>
-                      )
-                    })
-                  }
-                </Disclosure.Panel>
-              </>)}
+              <Disclosure.Button className="flex mt-4">
+                <span>Catalog</span>
+                <ChevronDownIcon aria-hidden="true" className={classNames(open ? `rotate-180 transform` : '', 'transition-transform size-[23px]')} />
+              </Disclosure.Button> 
+              <Disclosure.Panel className="inline-block">
+                {
+                  catalog.map((item) => {
+                    return (
+                      <Disclosure.Button as='a' href={item.Link} key={item.name} className="block" >
+                        {item.name}
+                      </Disclosure.Button>
+                    )
+                  })
+                }
+              </Disclosure.Panel>
+            </>)}
           </Disclosure>
         </Dialog.Panel>
-      </Dialog> */}
+      </Dialog>
 
-      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+      {/* <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-[black] px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
@@ -186,7 +191,7 @@ export default function Navbar() {
             </div>
           </div>
         </Dialog.Panel>
-      </Dialog>
+      </Dialog> */}
     </header>
   );
 

@@ -1,6 +1,16 @@
-import { Button } from "./utilComps"
+import { useState } from "react"
+import { Button } from "../../util/utilComps"
+import { CardProps } from "../../pages/Catalog"
+import { CiSearch } from "react-icons/ci";
 
-export default function SearchFilter() {
+
+interface SearchFilterProps {
+    movies: CardProps[],
+    onFilter: (filtered: CardProps[]) => void,
+    setCount: (count: number) => void
+}
+
+export default function SearchFilter({ movies, onFilter, setCount }: SearchFilterProps) {
     const options = {
         quality: [
             'all',
@@ -17,16 +27,35 @@ export default function SearchFilter() {
         orderBy: ['Latest', 'Oldest', 'Featured', 'Seeds', 'Peers', 'Year', 'Rating', 'Likes', 'Alphabetical', 'Downloads']
     }
 
+    // const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const searched = e.currentTarget.value
+    //     setSearch(searched)
+    //     console.log(search)
+    // }
+
+    const [search, setSearch] = useState('')
+
+    function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
+        const searched = e.currentTarget.value.trim().toLowerCase()
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            const filtered = searched === '' ? movies : movies.filter((movie) =>
+                movie.name.toLowerCase().includes(searched))
+            setCount(filtered.length)
+            onFilter(filtered)
+        }
+    }
 
     return (
         <section className="w-[90%] mx-auto flex justify-center p-10 border">
             <form action="" className="grid gap-3">
                 <div className="flex gap-4">
-                    <input type="text" placeholder="Search..." className="rounded-xl border p-2"/>
-                    <Button value="Search" url={'#'} />
+                    <input type="text" placeholder="Search..." value={search} className="rounded-xl border p-2 w-[60%]"
+                        onKeyDown={(e) => handleKeyPress(e)}
+                        onChange={(e) => setSearch(e.currentTarget.value)} />
+                    <Button value={<CiSearch size={25} fontWeight={700} />} url="#" handleClick={() => handleKeyPress} />
                 </div>
-
-                <div className="flex gap-3">
+                <div className="flex gap-3 flex-wrap">
                     <div className="selects-container">
                         <p>Quality:</p>
                         <select name="quality">
