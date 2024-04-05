@@ -2,12 +2,12 @@ import ReactDOM from 'react-dom/client'
 
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom';
-import { MovieProvider } from './context/MovieFetchContext.tsx';
+import { ContextProvider } from './context/MovieFetchContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
-        <MovieProvider>
+        <ContextProvider>
             <App />
-        </MovieProvider>
+        </ContextProvider>
     </BrowserRouter>
 )

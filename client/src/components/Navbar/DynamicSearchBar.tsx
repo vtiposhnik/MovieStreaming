@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import { useMovieContext } from "../../context/MovieFetchContext";
+import { useCommonContext } from "../../context/MovieFetchContext";
 import { CardProps } from "../../pages/Catalog";
 
 export default function DynamicSearchBar() {
-    const { movies } = useMovieContext()
+    const { movies } = useCommonContext()
     const newRef = useRef<HTMLDivElement>(null)
 
     const [filteredList, setFilteredList] = useState<CardProps[]>([])
@@ -37,7 +37,7 @@ export default function DynamicSearchBar() {
     }
 
     return (
-        <div className="relative">
+        <div className="hidden md:relative md:block">
             <input type="text" placeholder="Search..." className="border rounded-xl px-4 py-2"
                 onChange={(e) => handleSearch(e)}
                 value={input} />

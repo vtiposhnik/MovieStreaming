@@ -4,7 +4,9 @@ import {
   Bars3Icon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import { Button } from '../../util/utilComps'
 import { Link } from 'react-router-dom'
+import { useCommonContext } from '../../context/MovieFetchContext'
 import DynamicSearchBar from './DynamicSearchBar'
 
 const catalog = [
@@ -25,6 +27,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { setClicked } = useCommonContext()
 
   return (
     <header className='px-5 py-3'>
@@ -67,9 +70,8 @@ export default function Navbar() {
 
         <DynamicSearchBar />
 
-        <div className='hidden lg:flex gap-2'>
-          <Link to=""> Sign Up</Link>
-          <Link to="">Sign In</Link>
+        <div className='hidden lg:block cursor-pointer'>
+          <Button handleClick={() => {setClicked(true)}} value="Sign In" />
         </div>
 
         <div className="flex lg:hidden">
@@ -95,7 +97,7 @@ export default function Navbar() {
               <Disclosure.Button className="flex mt-4">
                 <span>Catalog</span>
                 <ChevronDownIcon aria-hidden="true" className={classNames(open ? `rotate-180 transform` : '', 'transition-transform size-[23px]')} />
-              </Disclosure.Button> 
+              </Disclosure.Button>
               <Disclosure.Panel className="inline-block">
                 {
                   catalog.map((item) => {

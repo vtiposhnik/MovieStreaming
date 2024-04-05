@@ -9,13 +9,15 @@ interface CardProps {
 }
 interface MovieContextProps {
     movies: CardProps[],
-    setMovies: React.Dispatch<React.SetStateAction<CardProps[]>>
+    setMovies: React.Dispatch<React.SetStateAction<CardProps[]>>,
+    clicked: boolean,
+    setClicked: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const MovieContext = createContext<MovieContextProps | undefined>(undefined)
+const Context = createContext<MovieContextProps | undefined>(undefined)
 
-export const useMovieContext = () => {
-    const context = useContext(MovieContext);
+export const useCommonContext = () => {
+    const context = useContext(Context);
 
     if (!context) {
         throw new Error('useMovieContext must be used within a MovieProvider');
@@ -23,13 +25,16 @@ export const useMovieContext = () => {
     return context;
 };
 
-export const MovieProvider = ({ children }) => {
+export const ContextProvider = ({ children }) => {
     const [movies, setMovies] = useState<CardProps[]>([]);
+    const [clicked, setClicked] = useState(false)
 
     const value = {
         movies,
-        setMovies
+        setMovies,
+        clicked,
+        setClicked
     }
 
-    return <MovieContext.Provider value={value}> {children}</MovieContext.Provider>
+    return <Context.Provider value={value}> {children} </Context.Provider>
 }

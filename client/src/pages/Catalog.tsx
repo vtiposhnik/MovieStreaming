@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import '../assets/styles/styles.css'
 import Pagination from "../components/catalogComps/Pagination";
 import SearchFilter from "../components/catalogComps/SearchFilter";
 import { Button } from "../util/utilComps";
 import fetchMovies from "../util/constants";
-import { useMovieContext } from "../context/MovieFetchContext";
+import { useCommonContext } from "../context/MovieFetchContext";
 
 export interface CardProps {
     id: number,
@@ -15,7 +15,7 @@ export interface CardProps {
 }
 
 export default function Catalog() {
-    const { movies, setMovies } = useMovieContext()
+    const { movies, setMovies } = useCommonContext()
 
     
     const [countMovies, setCountMovies] = useState(0)

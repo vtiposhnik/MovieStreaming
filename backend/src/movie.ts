@@ -1,6 +1,5 @@
 import { Sequelize, DataTypes } from 'sequelize'
 import { sequelize } from './db'
-import { mockData } from './arr'
 
 const movie = sequelize.define("movies", {
     id: {   

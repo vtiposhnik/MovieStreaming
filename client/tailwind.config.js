@@ -21,6 +21,7 @@ export default {
       'yellow': '#ffc82c',
       'gray-dark': '#273444',
       'gray': '#8492a6',
+      'gray-auth': '#808080',
       'gray-light': '#d3dce6',
     },
     fontFamily: {
