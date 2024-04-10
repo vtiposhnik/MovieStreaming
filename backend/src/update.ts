@@ -1,4 +1,4 @@
-import { movie } from "./movie";
+import { movie } from "./model/Movie";
 import { createApi } from "unsplash-js";
 import dotenv from 'dotenv'
 

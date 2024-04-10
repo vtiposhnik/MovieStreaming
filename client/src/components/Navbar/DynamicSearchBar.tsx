@@ -23,7 +23,6 @@ export default function DynamicSearchBar() {
         if (newRef.current && !newRef.current.contains(e.target as Node)) {
             setShowPopup(false);
         }
-        console.log(showPopup);
     }
 
     function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
